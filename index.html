@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- change the title -->
+    <title>Timed Multiple Choice Quiz</title>
+    <!-- Link bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- link CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .show {
+            display: block;
+        }
+
+        /* #gameContainer p{
+        display: none;
+      } */
+    </style>
+</head>
+
+<body>
+    <!-- navbar with a text to look like the example -->
+    <nav class="navbar navbar-light bg-dark">
+        <a class="navbar-brand" href="#">
+            <span id="topleft">View Highscores</span>
+        </a>
+    </nav>
+
+    <!-- main Div for the instructions of the quiz and a start button -->
+    <div align="center" id="info">
+        <h1>Fun Quiz</h1>
+        <p id="instructions">You have 75 seconds. If you choose the wrong answer,
+            the games will subtract 5 seconds from the time remaining.
+            At the end you will be asked to submit your score as the time left.
+            Good Luck!</p>
+        <button id="start">Start</button>
+    </div>
+
+<!-- creating Div for each section/ category -->
+    <div id="gameContainer">
+        <p>Time Left: <span id="timer"></span></p>
+        <div id="question"></div>
+        <div id="answer1" class="answer"></div>
+        <div id="answer2" class="answer"></div>
+        <div id="correct" class="correctAns answer"></div>
+        <div id="correctness"> </div>
+    </div>
+
+    <!-- this form is to put their names in and save in local storage -->
+    <!-- <form id="place">
+        <label for="userName">Enter Your Name: </label>
+        <br>
+        <input type="text" placeholder="putname" name="userName" id="userText" />
+
+    </form> -->
+
+    <!-- variables using DOM -->
+    <script type="text/javascript">
+        var startBtn = document.querySelector('#start');
+        var infoDiv = document.querySelector('#info');
+        var timeEl = document.querySelector('#timer');
+        var gameContainer = document.getElementById('gameContainer');
+        var questionDiv = document.getElementById('question');
+        var answerButtons = document.querySelectorAll('.answer');
+        var answer1Div = document.getElementById('answer1');
+        var answer2Div = document.getElementById('answer2');
+        var correctDiv = document.getElementById('correct');
+        var correctness = document.getElementById('correctness');
+        var counterEl=0;
+        var Correct=0;
+        var Incorrect=0;
+
+
+        // the array of questions and answers as objects
+        var questions = [
+            {
+
+                question: '1)Founder of C language?',
+                correct: 'Dennis Ritchie',
+                answer1: 'Vint Cerf',
+                answer2: 'Larry Page',
+            },
+            {
+                question: '2)Founder of JQuery?',
+                answer1: 'Linus Torvalds',
+                correct: 'John Resig',
+                answer2: 'Douglas Engelbart',
+            },
+            {
+                question: '3)Founder of Email?',
+                correct: 'Shiva Ayyadurai',
+                answer1: 'James Gosling',
+                answer2: 'Ajay V.Bhatt',
+            },
+            {
+                question: '4)Who invented Javascript?',
+                answer2: 'Douglas Crockford',
+                answer1: 'Sheryl Sandberg',
+                correct: 'Brendan Eich',
+            },
+            {
+                question: '5)Founder of Artificial Intelligence?',
+                answer1: 'Steve Jobs',
+                correct: 'John McCarthy',
+                answer2: 'Bill Gates and Paul Allen',
+            },
+            {
+                question: '6)Founder of WWW?',
+                answer1: 'Jurry Yang',
+                answer2: 'David Filo',
+                correct: 'Tim Berners-Lee',
+            }
+        ];
+
+// for the timer
+        var counter = 0;
+        //how many seconds for the quiz?
+        var secondsLeft = 75;
+        var timerInterval;
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(function () {
+                secondsLeft--;
+                timeEl.textContent = secondsLeft;
+
+                if (secondsLeft === 0) {
+                    clearInterval(timerInterval);
+                    handleIncorrectAnswer();
+                    counter++;
+                    renderQuestions();
+                }
+            }, 1000);
+        }
+
+        function toggleShowInfoDiv() {
+            if (infoDiv.style.display === 'none') {
+                infoDiv.style.display = 'block';
+            } else {
+                infoDiv.style.display = 'none';
+            }
+        }
+        // function toggleShowContainerDiv() {
+        //
+
+        gameContainer.classList.toggle('show');
+        // }
+        function handleIncorrectAnswer() {
+            // clearInterval(timerInterval);
+            secondsLeft = secondsLeft - 5;
+            startTimer();
+            console.log('Incorrect');
+        }
+
+        function renderQuestions() {
+            questionDiv.textContent = questions[counter].question;
+            answer1Div.textContent = questions[counter].answer1;
+            answer2Div.textContent = questions[counter].answer2;
+            correctDiv.textContent = questions[counter].correct;
+            startTimer();
+        }
+
+        startBtn.addEventListener('click', function () {
+            toggleShowInfoDiv();
+            gameContainer.style.display = 'block';
+            renderQuestions();
+        });
+
+        answerButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var userChoice = this.textContent;
+                var currentCorrectAnswer = questions[counter].correct;
+                if (userChoice === currentCorrectAnswer) {
+                   
+                    console.log({ userChoice, currentCorrectAnswer });
+                    console.log('CORRECT');
+                } else {
+                    handleIncorrectAnswer();
+                }
+
+                // include logic to make sure that there are more questions left in the array
+                // if(secondsLeft > 0 || counter){ 
+
+                counter++;
+
+                renderQuestions();
+
+                // } else{
+                //   // handle showing the end game screen
+                // }
+            });
+        });
+        gameContainer.style.display = 'none';
+
+
+
+    </script>
+
+</body>
+
+</html>
