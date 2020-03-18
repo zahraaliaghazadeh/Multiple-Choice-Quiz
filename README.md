@@ -19,7 +19,8 @@ d) What did you learn?
 I was able to grasp some DOM concepts from last week 's material
 
 e) What makes your project stand out? 
-This project can be better with 
+I m not proud of this project.
+
 f) Areas of improvement?
 
 *my correct answers somehow all moved to c , they should be fixed.
