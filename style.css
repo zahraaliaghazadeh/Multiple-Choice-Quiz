@@ -24,3 +24,7 @@ align-self: center;
  .answer:hover{
 color:blue;
  }
+
+ #correctness{
+     text-align: center;
+ }

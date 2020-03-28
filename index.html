@@ -40,15 +40,19 @@
         <button id="start">Start</button>
     </div>
 
-<!-- creating Div for each section/ category -->
+    <!-- creating Div for each section/ category -->
     <div id="gameContainer">
         <p>Time Left: <span id="timer"></span></p>
         <div id="question"></div>
         <div id="answer1" class="answer"></div>
         <div id="answer2" class="answer"></div>
-        <div id="correct" class="correctAns answer"></div>
+        <div id="answer3" class="answer"></div>
         <div id="correctness"> </div>
     </div>
+
+    <!-- <div>
+        <h2></h2>
+    </div> -->
 
     <!-- this form is to put their names in and save in local storage -->
     <!-- <form id="place">
@@ -57,6 +61,8 @@
         <input type="text" placeholder="putname" name="userName" id="userText" />
 
     </form> -->
+
+
 
     <!-- variables using DOM -->
     <script type="text/javascript">
@@ -68,9 +74,10 @@
         var answerButtons = document.querySelectorAll('.answer');
         var answer1Div = document.getElementById('answer1');
         var answer2Div = document.getElementById('answer2');
-        var correctDiv = document.getElementById('correct');
+        var answer3Div = document.getElementById('answer3');
         var correctness = document.getElementById('correctness');
-       
+        var coorrectans = "";
+
 
 
         // the array of questions and answers as objects
@@ -78,57 +85,82 @@
             {
 
                 question: '1)Founder of C language?',
-                correct: 'Dennis Ritchie',
-                answer1: 'Vint Cerf',
-                answer2: 'Larry Page',
+                answers: [
+                     'Dennis Ritchie',
+                     'Vint Cerf',
+                     'Larry Page',
+                ],
+                correct: 'Dennis Ritchie'
             },
             {
                 question: '2)Founder of JQuery?',
-                answer1: 'Linus Torvalds',
-                correct: 'John Resig',
-                answer2: 'Douglas Engelbart',
+                answers: [
+                     'Linus Torvalds',
+                     'John Resig',
+                     'Douglas Engelbart',
+            ],
+            correct: 'John Resig'
+
             },
             {
                 question: '3)Founder of Email?',
-                correct: 'Shiva Ayyadurai',
-                answer1: 'James Gosling',
-                answer2: 'Ajay V.Bhatt',
+                answers: [
+
+                     'Shiva Ayyadurai',
+                     'James Gosling',
+                     'Ajay V.Bhatt',
+                ],
+                correct: 'Shiva Ayyadurai'
             },
             {
                 question: '4)Who invented Javascript?',
-                answer2: 'Douglas Crockford',
-                answer1: 'Sheryl Sandberg',
-                correct: 'Brendan Eich',
+                answers: [
+                     'Douglas Crockford',
+                     'Sheryl Sandberg',
+                     'Brendan Eich',
+
+                ],
+                correct: 'Brandan Eich'
             },
             {
                 question: '5)Founder of Artificial Intelligence?',
-                answer1: 'Steve Jobs',
-                correct: 'John McCarthy',
-                answer2: 'Bill Gates and Paul Allen',
+                anwers: [
+                     'Steve Jobs',
+                     'John McCarthy',
+                     'Bill Gates and Paul Allen',
+
+                ],
+                correct: 'John McCarthy'
             },
             {
                 question: '6)Founder of WWW?',
-                answer1: 'Jurry Yang',
-                answer2: 'David Filo',
-                correct: 'Tim Berners-Lee',
+                answers: [
+
+                    'Jurry Yang',
+                    'David Filo',
+                    'Tim Berners-Lee',
+                ],
+                correct: 'Tim Berners-Lee'
             }
         ];
 
-// for the timer
+        // for the timer
         var counter = 0;
         //how many seconds for the quiz?
         var secondsLeft = 75;
         var timerInterval;
+
         function startTimer() {
-            clearInterval(timerInterval);
-            timerInterval = setInterval(function () {
+            // clearInterval(timerInterval);
+             timerInterval = setInterval(function () {
+
                 secondsLeft--;
                 timeEl.textContent = secondsLeft;
 
-                if (secondsLeft === 0) {
+                if (secondsLeft <= 0) {
                     clearInterval(timerInterval);
                     handleIncorrectAnswer();
-                    counter++;
+                    counter = 6;
                     renderQuestions();
                 }
             }, 1000);
@@ -149,31 +181,39 @@
         function handleIncorrectAnswer() {
             // clearInterval(timerInterval);
             secondsLeft = secondsLeft - 5;
-            startTimer();
+            // startTimer();
             console.log('Incorrect');
+            correctness.textContent = "Incorrect";
+            // alert("Incorrect!")
         }
 
         function renderQuestions() {
             questionDiv.textContent = questions[counter].question;
-            answer1Div.textContent = questions[counter].answer1;
-            answer2Div.textContent = questions[counter].answer2;
-            correctDiv.textContent = questions[counter].correct;
-            startTimer();
+            answer1Div.textContent = questions[counter].answers[0];
+            answer2Div.textContent = questions[counter].answers[1];
+            answer3Div.textContent = questions[counter].answers[2];
+            // startTimer();
         }
 
         startBtn.addEventListener('click', function () {
             toggleShowInfoDiv();
             gameContainer.style.display = 'block';
             renderQuestions();
+            startTimer();
         });
 
         answerButtons.forEach(function (button) {
             button.addEventListener('click', function () {
+               
+                // answer that user actually clicks
                 var userChoice = this.textContent;
+                // 
                 var currentCorrectAnswer = questions[counter].correct;
+                // console.log(questions[counter]);
                 if (userChoice === currentCorrectAnswer) {
-                   
+                    correctness.textContent = "correct";
                     console.log({ userChoice, currentCorrectAnswer });
+                    // alert("Correct!")
                     console.log('CORRECT');
                 } else {
                     handleIncorrectAnswer();
@@ -184,7 +224,18 @@
 
                 counter++;
 
-                renderQuestions();
+                if (counter===6) {
+                    // *** need a function to end the game and shows the users score instead of alert
+                    alert ("End Of Game! userScore=" + secondsLeft)
+                    // secondsLeft = 1;
+                    clearInterval (timerInterval);
+
+                } else{
+
+                    renderQuestions();
+
+                }
+
 
                 // } else{
                 //   // handle showing the end game screen
