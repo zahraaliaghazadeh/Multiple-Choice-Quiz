@@ -1,32 +1,30 @@
-# Homework4
-timed quiz- 03/17/2020
-a)  what, why, and how?
-1. first found the questions I wanted to display in the quiz and made choices for them.
-2. made the html file and the different div s to hold different cattegories.
-3. style file, centered the instructions , also I was styling as I go forward in the html.
-4. Used DOM with the help of office hours today , to make variables and to grab things by their id etc.
-5. have a div for correct and named the correct answers correct. 
-6. added the timer function , with help of activity 8
-7. added functions and searched about how to display them only when clicked
+# Code Quiz
+## Simple Multiple choice quiz game with timer
+This application is a multiple choice quiz. Once the user clicks on start, a timer of 75 seconds will start. By clicking on each wrong answer, it will subtract 5 seconds from the time left. The time left will be the score of the user at the end. I have had Math tutoring experience in the past and I have always wanted to create easy to grade solutions. This can be a great start for making such projects.
+#### Screen Shot
 
-b) Why did you build this project? 
-I have had Math tutoring experience in the past and I have always wanted to create easy to grade solutions. This can be a great start for making such projects. So basically to practice the things we have covered so far.
+![Screenshot](assets/images/Screenshot.png)
 
-c)What problem does it solve?
-It starts the quiz with the button after giving instructions, user finishes the quiz, in the console tab they can see if it is correct or not
 
-d) What did you learn?
-I was able to grasp some DOM concepts from last week 's material
+#### Installation
+To use this app you can click : [here](https://zahraaliaghazadeh.github.io/Multiple-Choice-Quiz/)
 
-e) What makes your project stand out? 
-I m not proud of this project.
+#### Usage
+In order to use this application you can open the link, then answer the questions , it will tell you if you answered correct or incorrect. 
 
-f) Areas of improvement?
 
-*my correct answers somehow all moved to c , they should be fixed.
+#### Contact
+Email: zahraaliaghazadeh@gmail.com
 
-*at the end of quiz there should be a submit button and a place to put name and then the quiz will display that in a list.
+LinkedIn: [LinkedIn](https://www.linkedin.com/in/yalda-aghazade-7a9b0390)
 
-*my timer works awesome , it also subtracts 5 for each wrong , but it goes to negative times. 
+#### Licence
+MIT license
+copy right © Zahra Ali Aghazadeh
 
-*the shape of buttons look like text , they should be changed to a button looking text, but at least I already added the hover 
+####  Areas of improvement
+
+At the end of quiz there should be a submit button and a place to put name and then the quiz will display that in a list.
+
+The shape of buttons look like text , they should be changed to buttons, but I already added the hover effect.
+
