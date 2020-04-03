@@ -1,4 +1,4 @@
-# Code Quiz
+# [Code Quiz](https://zahraaliaghazadeh.github.io/Multiple-Choice-Quiz/)
 ## Simple Multiple choice quiz game with timer
 This application is a multiple choice quiz. Once the user clicks on start, a timer of 75 seconds will start. By clicking on each wrong answer, it will subtract 5 seconds from the time left. The time left will be the score of the user at the end. I have had Math tutoring experience in the past and I have always wanted to create easy to grade solutions. This can be a great start for making such projects.
 #### Screen Shot
